@@ -33,11 +33,11 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="IdentityModel.AspNetCore.OAuth2Introspection" Version="4.0.1" />
+    <PackageReference Include="IdentityModel.AspNetCore.OAuth2Introspection" Version="6.1.0" />
     
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
     
-    <PackageReference Include="minver" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="minver" Version="4.2.0" PrivateAssets="All" />
   </ItemGroup>
 </Project>

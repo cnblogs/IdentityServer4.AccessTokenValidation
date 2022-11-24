@@ -27,7 +27,7 @@ namespace Tests.Util
                 {
                     app.UseAuthentication();
 
-                    app.Use((context, next) =>
+                    app.Use(async (context, next) =>
                     {
                         var user = context.User;
 
@@ -40,7 +40,7 @@ namespace Tests.Util
                             context.Response.StatusCode = 401;
                         }
 
-                        return Task.CompletedTask;
+                        await next();
                     });
                 }));
         }
