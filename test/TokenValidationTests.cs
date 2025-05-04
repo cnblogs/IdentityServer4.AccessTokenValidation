@@ -1,5 +1,5 @@
+using Duende.IdentityModel.Client;
 using FluentAssertions;
-using IdentityModel.Client;
 using System.Net;
 using System.Threading.Tasks;
 using Tests.Util;
