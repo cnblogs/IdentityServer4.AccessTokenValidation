@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace IdentityServer4.AccessTokenValidation
 {
-    internal class ConfigureInternalOptions : 
+    internal class ConfigureInternalOptions :
         IConfigureNamedOptions<JwtBearerOptions>,
         IConfigureNamedOptions<OAuth2IntrospectionOptions>
     {

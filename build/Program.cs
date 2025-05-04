@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using static Bullseye.Targets;
 using static SimpleExec.Command;
 
@@ -22,7 +23,7 @@ namespace build
             public const string SignPackage = "sign-package";
         }
 
-        internal static void Main(string[] args)
+        internal static async Task Main(string[] args)
         {
             Target(Targets.RestoreTools, () =>
             {
@@ -34,17 +35,17 @@ namespace build
                 Run("dotnet", "clean -c Release -v m --nologo");
             });
 
-            Target(Targets.Build, DependsOn(Targets.CleanBuildOutput), () =>
+            Target(Targets.Build, dependsOn: [Targets.CleanBuildOutput], () =>
             {
                 Run("dotnet", "build -c Release --nologo");
             });
 
-            Target(Targets.SignBinary, DependsOn(Targets.Build, Targets.RestoreTools), () =>
+            Target(Targets.SignBinary, dependsOn: [Targets.Build, Targets.RestoreTools], () =>
             {
                 Sign("./src/bin/Release", "IdentityServer4.AccessTokenValidation.dll");
             });
 
-            Target(Targets.Test, DependsOn(Targets.Build), () =>
+            Target(Targets.Test, dependsOn: [Targets.Build], () =>
             {
                 Run("dotnet", "test -c Release --no-build --nologo");
             });
@@ -57,21 +58,21 @@ namespace build
                 }
             });
 
-            Target(Targets.Pack, DependsOn(Targets.Build, Targets.CleanPackOutput), () =>
+            Target(Targets.Pack, dependsOn: [Targets.Build, Targets.CleanPackOutput], () =>
             {
                 Run("dotnet", $"pack ./src/IdentityServer4.AccessTokenValidation.csproj -c Release -o {Directory.CreateDirectory(packOutput).FullName} --no-build --nologo");
             });
 
-            Target(Targets.SignPackage, DependsOn(Targets.Pack, Targets.RestoreTools), () =>
+            Target(Targets.SignPackage, dependsOn: [Targets.Pack, Targets.RestoreTools], () =>
             {
                 Sign(packOutput, "*.nupkg");
             });
 
-            Target("default", DependsOn(Targets.Test, Targets.Pack));
+            Target("default", dependsOn: [Targets.Test, Targets.Pack]);
 
-            Target("sign", DependsOn(Targets.SignBinary, Targets.Test, Targets.SignPackage));
+            Target("sign", dependsOn: [Targets.SignBinary, Targets.Test, Targets.SignPackage]);
 
-            RunTargetsAndExit(args, ex => ex is SimpleExec.NonZeroExitCodeException || ex.Message.EndsWith(envVarMissing));
+            await RunTargetsAndExitAsync(args, ex => ex is SimpleExec.ExitCodeException || ex.Message.EndsWith(envVarMissing));
         }
 
         private static void Sign(string path, string searchTerm)

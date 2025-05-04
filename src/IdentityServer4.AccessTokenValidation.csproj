@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <Description>ASP.NET Core authentication handler to validate JWT and reference tokens from IdentityServer4</Description>
     <Authors>Brock Allen;Dominick Baier</Authors>
@@ -13,11 +13,11 @@
     <PackageProjectUrl>https://github.com/cnblogs/IdentityServer4.AccessTokenValidation</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageReleaseNotes>https://github.com/cnblogs/IdentityServer4.AccessTokenValidation/releases</PackageReleaseNotes>
-    
+
     <AssemblyOriginatorKeyFile>../key.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
-    
+
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -31,14 +31,14 @@
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
-  
+
   <ItemGroup>
-    <PackageReference Include="IdentityModel" Version="6.0.0" />
-    <PackageReference Include="IdentityModel.AspNetCore.OAuth2Introspection" Version="6.1.0" />
-    
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
-    
-    <PackageReference Include="minver" Version="4.2.0" PrivateAssets="All" />
+    <PackageReference Include="Duende.IdentityModel" Version="7.0.0" />
+    <PackageReference Include="Cnblogs.IdentityModel.AspNetCore.OAuth2Introspection" Version="7.0.0" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.4" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+
+    <PackageReference Include="minver" Version="6.0.0" PrivateAssets="All" />
   </ItemGroup>
 </Project>
